@@ -38,7 +38,13 @@ Module Module1
     End Sub
     Public Function retrieveSims() As Boolean
         Sims = Nothing
-        Dim query = "Select * from SimulationWells"
+        Dim query =
+        "Select * from Sim_Box_Emulator " & vbCrLf &
+        "Where Drilling = 'True' and " & vbCrLf &
+        "Start_Date < '" & Date.UtcNow() & "' AND " &
+        "End_Date > '" & Date.UtcNow() & "' "
+
+
         Try
             Sims = QueryToDS(query).Tables(0)
             If Sims IsNot Nothing AndAlso Sims.Rows.Count > 0 Then
